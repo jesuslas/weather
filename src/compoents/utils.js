@@ -2,6 +2,9 @@ import moment from "moment";
 import clearSky from "../assets/images/icon_clear_sky.png";
 import cloudsSky from "../assets/images/icon_clouds_sky.png";
 import rain from "../assets/images/icon_rain_sky.png";
+import snow from "../assets/images/icon_clouds_snow.png";
+import clearSkyDay from "../assets/images/icon_clear_sky_day.png";
+import clearSkyNight from "../assets/images/icon_clear_sky_night.png";
 
 export function toLowerCaseAndRemoveSpaces(string) {
   return String(string)
@@ -25,17 +28,29 @@ export function getTime(value) {
   return moment(value).format("HH:MM");
 }
 
-export function getIconWeather(value) {
+export function getIconWeather(value, time) {
   let image = clearSky;
   switch (value) {
     case "Clear":
-      image = clearSky;
+      if (time) {
+        time = parseInt(time);
+        if (time < 5 || time >= 21) {
+          image = clearSkyNight;
+        } else {
+          image = clearSkyDay;
+        }
+      } else {
+        image = clearSky;
+      }
       break;
     case "Clouds":
       image = cloudsSky;
       break;
     case "Rain":
       image = rain;
+      break;
+    case "Snow":
+      image = snow;
       break;
 
     default:

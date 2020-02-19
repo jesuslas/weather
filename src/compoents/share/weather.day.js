@@ -21,8 +21,13 @@ function WeatherDay(props) {
         </div>
       </Grid>
       <Grid item xs={12}>
+        <div className={classes.temp}>
+          {((parseInt(temp_min) + parseInt(temp_max)) / 2).toFixed(0)}°
+        </div>
+      </Grid>
+      <Grid item xs={12}>
         <div className={classes.item}>
-          {temp_min}° {temp_max}°
+          {temp_min}° / {temp_max}°
         </div>
       </Grid>
     </Grid>
@@ -31,14 +36,18 @@ function WeatherDay(props) {
 
 const useStyles = makeStyles(() => ({
   day: {
-    height: 120,
+    height: 200,
     padding: 10
   },
   item: {
     textAlign: "center"
   },
+  temp: {
+    textAlign: "center",
+    fontSize: 40
+  },
   image: {
-    width: 30
+    width: 20
   }
 }));
 export default memo(WeatherDay);

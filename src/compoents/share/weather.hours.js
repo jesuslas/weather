@@ -26,7 +26,10 @@ function WeatherHours(props) {
                   <ListItemAvatar>
                     <Avatar>
                       <img
-                        src={getIconWeather(_main)}
+                        src={getIconWeather(
+                          _main,
+                          getTime(dt_txt).split(":")[0]
+                        )}
                         alt="clear"
                         className={classes.image}
                       />
