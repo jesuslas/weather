@@ -4,6 +4,7 @@ import { Tabs, Tab, Grid, AppBar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { toLowerCaseAndRemoveSpaces, groupBy, processTemp } from "../utils";
 import WeatherDay from "./weather.day";
+import WeatherHours from "./weather.hours";
 import {getWeather5Days} from "../../services/weather.serv";
 import moment from "moment";
 
@@ -15,14 +16,14 @@ const getWeather5DaysFromApi = async ()=>{
     }
     if(cod === "200"){
         let days = groupBy(list, "dt_txt", processValue);
-        console.log('days',days);
         days = Object.keys(days).map(label=>{
           const {main:{temp_min,temp_max},weather:[{ main }]} = days[label][0];
+          const hours = days[label];
           return (
           {
             label,
             to: `/${toLowerCaseAndRemoveSpaces(label)}`,
-            render: ()=>{},
+            render:(_props)=>( <WeatherHours {...{temp_min,temp_max,label,hours}}/>),
             temp_min: processTemp(temp_min),
             temp_max: processTemp(temp_max),
             main
@@ -81,7 +82,7 @@ const getWeather5DaysFromApi = async ()=>{
                         to={tabRoute(to)}
                         value={tabRoute(to)}
                         key={label}
-                        label={<WeatherDay {...{ label, ...rest }}/>}
+                        label={<WeatherDay {...{ label, ...rest}}/>}
                         component={Link}
                         className={classes.tabButton}
                         tabIndex={index}
@@ -91,13 +92,14 @@ const getWeather5DaysFromApi = async ()=>{
                   </Tabs>
                 </AppBar>
                 <Switch>
-                  {tabs.map(({ render, to }, i) => (
+                  {tabs.map(({ render, to, ...rest }, i) => (
+                    
                     <Route
                       key={i}
                       render={_props => (
                      <>
                           { hasData ? (
-                            <>{render(_props)}</>
+                            <>{render({..._props,...rest, uno:"dos"})}</>
                           ) : (
                             <div className={classes.noData}>
                               <Typography>No data to display</Typography>
