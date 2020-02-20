@@ -160,7 +160,8 @@ const useStyles = makeStyles(() => ({
   },
   divider: {
     backgroundColor: "gray",
-    marginBottom: 50
+    marginBottom: 50,
+    marginTop: 50
   }
 }));
 export default withRouter(memo(TabsRouter));
