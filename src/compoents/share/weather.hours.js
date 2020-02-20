@@ -5,15 +5,40 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Avatar from "@material-ui/core/Avatar";
 import { processTemp, getTime, getIconWeather, traslateDay } from "../utils";
-
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 function WeatherHours(props) {
-  const { label, temp_min = 0, temp_max = 10, main, hours, city } = props;
-
+  const {
+    label,
+    temp_min = 0,
+    temp_max = 10,
+    main,
+    hours,
+    city
+    // setCity
+  } = props;
+  console.log("props", props);
   const classes = useStyles();
   return (
     <Grid container spacing={1} className={classes.day}>
       <Grid item xs={12}>
         <div className={classes.label}>{city.name}</div>
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          // open={open}
+          // onClose={handleClose}
+          // onOpen={handleOpen}
+          // value={age}
+          // onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
       </Grid>
       <Grid item xs={12}>
         <div className={classes.labelDay}>{traslateDay(label)}</div>

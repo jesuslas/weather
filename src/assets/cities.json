@@ -1,0 +1,29 @@
+[
+    {
+        "id": 3873544,
+        "name": "Región Metropolitana de Santiago",
+        "country": "CL",
+        "coord": {
+          "lon": -70.64724,
+          "lat": -33.472691
+        }
+      },
+      {
+        "id": 3649403,
+        "name": "Caracas",
+        "country": "VE",
+        "coord": {
+          "lon": -70.502441,
+          "lat": 8.82359
+        }
+      },
+      {
+        "id": 3893894,
+        "name": "Concepcion",
+        "country": "CL",
+        "coord": {
+          "lon": -73.049767,
+          "lat": -36.826988
+        }
+      }
+]

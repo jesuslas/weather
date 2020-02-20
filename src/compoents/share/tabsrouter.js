@@ -44,8 +44,10 @@ const getWeather5DaysFromApi = async () => {
       return {
         label,
         to: `/${toLowerCaseAndRemoveSpaces(label)}`,
-        render: () => (
-          <WeatherHours {...{ main, temp_min, temp_max, label, hours, city }} />
+        render: props => (
+          <WeatherHours
+            {...{ main, temp_min, temp_max, label, hours, city, ...props }}
+          />
         ),
         temp_min: processTemp(temp_min),
         temp_max: processTemp(temp_max),
@@ -59,6 +61,7 @@ const getWeather5DaysFromApi = async () => {
 function TabsRouter(props) {
   const { variant, onChange, hasData = true } = props;
   const [tabs, setTabs] = useState([]);
+  const [city, setCity] = useState("3873544");
   // console.log("this.props.match.params.redirectParam", props);
   useEffect(() => {
     async function getDays() {
@@ -66,7 +69,7 @@ function TabsRouter(props) {
       setTabs(days5);
     }
     getDays();
-  }, []);
+  }, city);
 
   const classes = useStyles();
   return (
@@ -86,7 +89,7 @@ function TabsRouter(props) {
                       render={_props => (
                         <>
                           {hasData ? (
-                            <>{render({ ..._props, ...rest, uno: "dos" })}</>
+                            <>{render({ ..._props, ...rest, setCity })}</>
                           ) : (
                             <div className={classes.noData}>
                               <Typography>No data to display</Typography>
