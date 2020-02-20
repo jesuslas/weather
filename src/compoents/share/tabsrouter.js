@@ -10,6 +10,17 @@ import { getWeather5Days } from "../../services/weather.serv";
 import moment from "moment";
 import { Divider } from "@material-ui/core";
 
+const getMinAndMaxTemp = hours => {
+  hours = hours.sort(
+    ({ main: { temp_max: aMax } }, { main: { temp_max: bMax } }) => {
+      return aMax - bMax;
+    }
+  );
+  return {
+    temp_min: hours[0].main.temp_max,
+    temp_max: hours[hours.length - 1].main.temp_max
+  };
+};
 const getWeather5DaysFromApi = async () => {
   let weatherDays = await getWeather5Days();
   const { cod, list, city } = await weatherDays.json();
@@ -20,10 +31,10 @@ const getWeather5DaysFromApi = async () => {
     let days = groupBy(list, "dt_txt", processValue);
     days = Object.keys(days).map(label => {
       const {
-        main: { temp_min, temp_max },
         weather: [{ main }]
       } = days[label][0];
       const hours = days[label];
+      const { temp_min, temp_max } = getMinAndMaxTemp(hours);
       if (hours.length < 8) {
         const diff = 8 - hours.length;
         for (let i = 0; i < diff; i++) {
@@ -48,7 +59,7 @@ const getWeather5DaysFromApi = async () => {
 function TabsRouter(props) {
   const { variant, onChange, hasData = true } = props;
   const [tabs, setTabs] = useState([]);
-  console.log("this.props.match.params.redirectParam", props);
+  // console.log("this.props.match.params.redirectParam", props);
   useEffect(() => {
     async function getDays() {
       const days5 = await getWeather5DaysFromApi();
