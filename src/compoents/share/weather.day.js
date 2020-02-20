@@ -12,7 +12,7 @@ function WeatherDay(props) {
       <Grid item xs={12}>
         <div className={classes.label}>{traslateDay(label)}</div>
       </Grid>
-      <Grid container xs={12} spacing={0}>
+      <Grid container spacing={0}>
         <Grid item xs={12} sm={4}>
           <div className={classes.imageItem}>
             <Avatar src={getIconWeather(main)} />

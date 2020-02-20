@@ -15,7 +15,7 @@ function WeatherHours(props) {
       <Grid item xs={12}>
         <div className={classes.labelDay}>{traslateDay(label)}</div>
       </Grid>
-      <Grid container item xs={12}>
+      <Grid container item>
         <Grid item xs={12} sm={5} />
         <Grid item xs={12} sm={1}>
           <Avatar
@@ -35,13 +35,13 @@ function WeatherHours(props) {
         </Grid>
         <Grid item xs={12} sm={5} />
       </Grid>
-      <Grid container item xs={12}>
+      <Grid container>
         <Grid item xs={12}>
           <List className={classes.list}>
             {(hours || []).map(
               ({ dt_txt, main: { temp }, weather: [{ main: _main }] }, i) => (
                 <ListItem key={i}>
-                  <Grid container xs={12} spacing={0}>
+                  <Grid container spacing={0}>
                     <Grid item xs={12}>
                       <div className={classes.label}>{getTime(dt_txt)}</div>
                     </Grid>
@@ -49,7 +49,6 @@ function WeatherHours(props) {
                       <div className={classes.imageItem}>
                         <Avatar
                           classes={{ root: classes.avatarSmall }}
-                          sizes={10}
                           src={getIconWeather(
                             _main,
                             getTime(dt_txt).split(":")[0]
