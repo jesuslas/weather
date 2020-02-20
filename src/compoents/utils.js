@@ -25,7 +25,7 @@ export function processTemp(temp) {
 }
 
 export function getTime(value) {
-  return moment(value).format("HH:MM");
+  return moment(value).format("H:00");
 }
 
 export function getIconWeather(value, time) {
@@ -57,4 +57,18 @@ export function getIconWeather(value, time) {
       break;
   }
   return image;
+}
+
+export function traslateDay(value) {
+  let day = toLowerCaseAndRemoveSpaces(value);
+  const days = {
+    monday: "Lunes",
+    tuesday: "Martes",
+    wednesday: "Miércoles",
+    thursday: "Jueves",
+    friday: "Viernes",
+    saturday: "Sábado",
+    sunday: "Domingo"
+  };
+  return days[day] || "invalid day";
 }
