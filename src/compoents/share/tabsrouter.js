@@ -24,6 +24,12 @@ const getWeather5DaysFromApi = async () => {
         weather: [{ main }]
       } = days[label][0];
       const hours = days[label];
+      if (hours.length < 8) {
+        const diff = 8 - hours.length;
+        for (let i = 0; i < diff; i++) {
+          hours.push(hours[hours.length - 1]);
+        }
+      }
       return {
         label,
         to: `/${toLowerCaseAndRemoveSpaces(label)}`,
