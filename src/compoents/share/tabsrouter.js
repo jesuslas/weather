@@ -12,7 +12,7 @@ import { Divider } from "@material-ui/core";
 
 const getWeather5DaysFromApi = async () => {
   let weatherDays = await getWeather5Days();
-  const { cod, list } = await weatherDays.json();
+  const { cod, list, city } = await weatherDays.json();
   const processValue = value => {
     return moment(value).format("dddd");
   };
@@ -28,7 +28,7 @@ const getWeather5DaysFromApi = async () => {
         label,
         to: `/${toLowerCaseAndRemoveSpaces(label)}`,
         render: () => (
-          <WeatherHours {...{ main, temp_min, temp_max, label, hours }} />
+          <WeatherHours {...{ main, temp_min, temp_max, label, hours, city }} />
         ),
         temp_min: processTemp(temp_min),
         temp_max: processTemp(temp_max),

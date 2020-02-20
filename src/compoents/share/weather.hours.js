@@ -7,11 +7,14 @@ import Avatar from "@material-ui/core/Avatar";
 import { processTemp, getTime, getIconWeather, traslateDay } from "../utils";
 
 function WeatherHours(props) {
-  const { label, temp_min = 0, temp_max = 10, main, hours } = props;
+  const { label, temp_min = 0, temp_max = 10, main, hours, city } = props;
 
   const classes = useStyles();
   return (
     <Grid container spacing={1} className={classes.day}>
+      <Grid item xs={12}>
+        <div className={classes.label}>{city.name}</div>
+      </Grid>
       <Grid item xs={12}>
         <div className={classes.labelDay}>{traslateDay(label)}</div>
       </Grid>
@@ -112,7 +115,7 @@ const useStyles = makeStyles(() => ({
     width: 25,
     height: 25,
     marginTop: 5,
-    marginLeft: 30
+    marginLeft: 15
   },
   avatarBig: {
     width: 65,
