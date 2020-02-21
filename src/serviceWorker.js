@@ -33,6 +33,7 @@ export function register(config) {
     }
     window.addEventListener("fetch", function(event) {
       const request = event.request;
+      console.log("request.method", request.method);
       // get
       if (request.method !== "GET") {
         return;
