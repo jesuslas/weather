@@ -12,3 +12,4 @@ node_modules/*
 *.md
 *.cmd
 *.yml
+*.psd
