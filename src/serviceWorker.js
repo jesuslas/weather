@@ -9,6 +9,7 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
+const VERSION = "v1";
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
@@ -31,11 +32,17 @@ export function register(config) {
       return;
     }
     window.addEventListener("fetch", function(event) {
-      event.respondWith(
-        caches.match(event.request).then(function(response) {
-          return response || fetch(event.request);
-        })
-      );
+      const request = event.request;
+      // get
+      if (request.method !== "GET") {
+        return;
+      }
+
+      // buscar en cache
+      event.respondWith(cachedResponse(request));
+
+      // actualizar el cache
+      event.waitUntil(updateCache(request));
     });
 
     window.addEventListener("load", () => {
@@ -59,6 +66,17 @@ export function register(config) {
       }
     });
   }
+}
+async function cachedResponse(request) {
+  const cache = await caches.open(VERSION);
+  const response = await cache.match(request);
+  return response || fetch(request);
+}
+
+async function updateCache(request) {
+  const cache = await caches.open(VERSION);
+  const response = await fetch(request);
+  return cache.put(request, response);
 }
 
 function registerValidSW(swUrl, config) {
