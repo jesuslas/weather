@@ -34,7 +34,8 @@ const getWeather5DaysFromApi = async () => {
         weather: [{ main }]
       } = days[label][0];
       const hours = days[label];
-      const { temp_min, temp_max } = getMinAndMaxTemp(hours);
+      const hoursMinMax = [...hours];
+      const { temp_min, temp_max } = getMinAndMaxTemp(hoursMinMax);
       if (hours.length < 8) {
         const diff = 8 - hours.length;
         for (let i = 0; i < diff; i++) {
@@ -49,7 +50,8 @@ const getWeather5DaysFromApi = async () => {
         ),
         temp_min: processTemp(temp_min),
         temp_max: processTemp(temp_max),
-        main
+        main,
+        hours
       };
     });
     return days;
@@ -57,16 +59,23 @@ const getWeather5DaysFromApi = async () => {
   return [];
 };
 function TabsRouter(props) {
-  const { variant, onChange, hasData = true } = props;
+  const { variant, onChange, hasData = true, setData, setCurrentDay } = props;
   const [tabs, setTabs] = useState([]);
-  // console.log("this.props.match.params.redirectParam", props);
-  useEffect(() => {
-    async function getDays() {
-      const days5 = await getWeather5DaysFromApi();
-      setTabs(days5);
-    }
-    getDays();
-  }, []);
+  const urlDay = props.location.pathname.split("/")[1];
+  setCurrentDay(urlDay);
+
+  useEffect(
+    () => {
+      async function getDays() {
+        const days5 = await getWeather5DaysFromApi();
+        setTabs(days5);
+        console.log("days5", days5);
+        setData(days5);
+      }
+      getDays();
+    },
+    [setData]
+  );
 
   const classes = useStyles();
   return (

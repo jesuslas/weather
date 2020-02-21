@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TabsRouter from "./compoents/share/tabsrouter";
 import WeatherChart from "./compoents/share/weater.chart";
@@ -7,21 +7,26 @@ import { Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 function App() {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const [currentDay, setCurrentDay] = useState([]);
+  console.log("data", data);
   return (
     <div className="App">
       <header className="App-header">
         <div>
           <Router>
             <Switch>
-              <TabsRouter />
+              <TabsRouter {...{ setData, setCurrentDay }} />
             </Switch>
           </Router>
           <Divider variant="middle" classes={{ root: classes.divider }} />
           <WeatherChart
             {...{
-              width: 700,
+              width: 740,
               height: 200,
-              margin: { left: 40, right: 20, top: 30, bottom: 40 }
+              margin: { left: 80, right: 20, top: 30, bottom: 40 },
+              data,
+              currentDay
             }}
           />
         </div>

@@ -8,9 +8,9 @@ import { AxisLeft, AxisBottom } from "@vx/axis";
 import { Area, LinePath, Line } from "@vx/shape";
 import { scaleTime, scaleLinear } from "@vx/scale";
 import { extent } from "d3-array";
-
-const data = genDateValue(20);
-console.log("data", data);
+import { toLowerCaseAndRemoveSpaces, processTemp } from "../utils";
+import moment from "moment";
+console.log("genDateValue(20)", genDateValue(20));
 // accessors
 const x = d => d.date;
 const y = d => d.value;
@@ -28,7 +28,25 @@ function numTicksForWidth(width) {
   return 10;
 }
 
-export default ({ width, height, margin }) => {
+const WeatherChart = ({ width, height, margin, data, currentDay }) => {
+  const getCurrentHourDay = days5 => {
+    return (
+      days5.find(
+        ({ label }) =>
+          toLowerCaseAndRemoveSpaces(label) ===
+          toLowerCaseAndRemoveSpaces(currentDay)
+      ) || []
+    );
+  };
+  data = getCurrentHourDay(data).hours || [];
+  data = data.map(({ dt_txt: date, main: { temp_min: value } }) => ({
+    date: new Date(
+      moment(date).format(
+        "ddd MMM DD YYYY HH:MM:00 [GMT-0300 (hora de verano de Chile)]"
+      )
+    ),
+    value: processTemp(value)
+  }));
   // bounds
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
@@ -43,7 +61,6 @@ export default ({ width, height, margin }) => {
     domain: [0, Math.max(...data.map(y))],
     nice: true
   });
-  console.log("xScale", xScale);
   return (
     <svg width={width} height={height}>
       <GradientOrangeRed
@@ -52,13 +69,20 @@ export default ({ width, height, margin }) => {
         fromOpacity={0.8}
         toOpacity={0.3}
       />
-      <rect x={0} y={0} width={width} height={height} fill="#f4419f" rx={14} />
+      <rect
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        fill="transparent"
+        rx={14}
+      />
       <Grid
         top={margin.top}
         left={margin.left}
         xScale={xScale}
         yScale={yScale}
-        stroke="rgba(142, 32, 95, 0.9)"
+        stroke="#021f58"
         width={xMax}
         height={yMax}
         numTicksRows={numTicksForHeight(height)}
@@ -91,9 +115,9 @@ export default ({ width, height, margin }) => {
           scale={yScale}
           hideZero
           numTicks={numTicksForHeight(height)}
-          label="Axis Left Label"
+          label="Temperatura"
           labelProps={{
-            fill: "#8e205f",
+            fill: "#fff",
             textAnchor: "middle",
             fontSize: 12,
             fontFamily: "Arial"
@@ -101,11 +125,11 @@ export default ({ width, height, margin }) => {
           stroke="#1b1a1e"
           tickStroke="#8e205f"
           tickLabelProps={() => ({
-            fill: "#8e205f",
+            fill: "#fff",
             textAnchor: "end",
-            fontSize: 10,
+            fontSize: 14,
             fontFamily: "Arial",
-            dx: "-0.25em",
+            dx: "0.25em",
             dy: "0.25em"
           })}
           tickComponent={({ formattedValue, ...tickProps }) => (
@@ -122,7 +146,7 @@ export default ({ width, height, margin }) => {
           {axis => {
             const tickLabelSize = 10;
             const tickRotate = 45;
-            const tickColor = "#8e205f";
+            const tickColor = "#fff";
             const axisCenter = (axis.axisToPoint.x - axis.axisFromPoint.x) / 2;
             return (
               <g className="my-custom-bottom-axis">
@@ -161,3 +185,4 @@ export default ({ width, height, margin }) => {
     </svg>
   );
 };
+export default WeatherChart;
