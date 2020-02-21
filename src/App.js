@@ -9,7 +9,6 @@ function App() {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [currentDay, setCurrentDay] = useState([]);
-  console.log("data", data);
   return (
     <div className="App">
       <header className="App-header">

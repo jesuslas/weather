@@ -3,14 +3,12 @@ import { Grid } from "@vx/grid";
 import { Group } from "@vx/group";
 import { curveBasis } from "@vx/curve";
 import { GradientOrangeRed } from "@vx/gradient";
-import { genDateValue } from "@vx/mock-data";
 import { AxisLeft, AxisBottom } from "@vx/axis";
 import { Area, LinePath, Line } from "@vx/shape";
 import { scaleTime, scaleLinear } from "@vx/scale";
 import { extent } from "d3-array";
 import { toLowerCaseAndRemoveSpaces, processTemp } from "../utils";
 import moment from "moment";
-console.log("genDateValue(20)", genDateValue(20));
 // accessors
 const x = d => d.date;
 const y = d => d.value;
