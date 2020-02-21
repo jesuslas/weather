@@ -77,7 +77,7 @@ function registerValidSW(swUrl, config) {
         }
         installingWorker.onstatechange = () => {
           console.log("installingWorker.state", installingWorker.state);
-          if (installingWorker.state === "installed") {
+          if (installingWorker.state === "activated") {
             window.addEventListener("fetch", function(event) {
               const request = event.request;
               console.log("request.method", request.method);
@@ -92,6 +92,8 @@ function registerValidSW(swUrl, config) {
               // actualizar el cache
               event.waitUntil(updateCache(request));
             });
+          }
+          if (installingWorker.state === "installed") {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
