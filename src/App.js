@@ -38,8 +38,8 @@ function App() {
 const useStyles = makeStyles(() => ({
   divider: {
     backgroundColor: "gray",
-    marginTop: 50,
-    marginBottom: 50
+    marginTop: 10,
+    marginBottom: 10
   }
 }));
 
