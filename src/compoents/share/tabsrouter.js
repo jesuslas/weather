@@ -106,7 +106,9 @@ function TabsRouter(props) {
                       path={tabRoute(to)}
                     />
                   ))}
-                  <Redirect to={tabRoute((tabs[0] || {}).to || "/wednesday")} />
+                  {(tabs[0] || {}).to && (
+                    <Redirect to={tabRoute((tabs[0] || {}).to)} />
+                  )}
                   ;
                 </Switch>
                 <Divider classes={{ root: classes.divider }} />
