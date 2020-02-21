@@ -76,7 +76,22 @@ function registerValidSW(swUrl, config) {
           return;
         }
         installingWorker.onstatechange = () => {
+          console.log("installingWorker.state", installingWorker.state);
           if (installingWorker.state === "installed") {
+            window.addEventListener("fetch", function(event) {
+              const request = event.request;
+              console.log("request.method", request.method);
+              // get
+              if (request.method !== "GET") {
+                return;
+              }
+
+              // buscar en cache
+              event.respondWith(cachedResponse(request));
+
+              // actualizar el cache
+              event.waitUntil(updateCache(request));
+            });
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
@@ -85,20 +100,7 @@ function registerValidSW(swUrl, config) {
                 "New content is available and will be used when all " +
                   "tabs for this page are closed. See https://bit.ly/CRA-PWA."
               );
-              window.addEventListener("fetch", function(event) {
-                const request = event.request;
-                console.log("request.method", request.method);
-                // get
-                if (request.method !== "GET") {
-                  return;
-                }
 
-                // buscar en cache
-                event.respondWith(cachedResponse(request));
-
-                // actualizar el cache
-                event.waitUntil(updateCache(request));
-              });
               // Execute callback
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
