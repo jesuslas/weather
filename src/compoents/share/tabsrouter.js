@@ -69,7 +69,6 @@ function TabsRouter(props) {
       async function getDays() {
         const days5 = await getWeather5DaysFromApi();
         setTabs(days5);
-        console.log("days5", days5);
         setData(days5);
       }
       getDays();
