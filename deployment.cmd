@@ -111,7 +111,7 @@ call :SelectNodeVersion
     IF "%DEPLOYMENT_ENV%" NEQ "prod" (
         call :ExecuteCmd !DEPLOYMENT_SOURCE!\node_modules\.bin\react-scripts build --progress false
         call :ExecuteCmd cp web.config "%DEPLOYMENT_SOURCE%\build"
-        call :ExecuteCmd cp custom-service-worker.js "%DEPLOYMENT_SOURCE%\build"
+        call :ExecuteCmd cp public\custom-service-worker.js "%DEPLOYMENT_SOURCE%\build"
     ) ELSE (
         call :ExecuteCmd !DEPLOYMENT_SOURCE!\node_modules\.bin\react-scripts build --progress false --prod
         call :ExecuteCmd cp web.config "%DEPLOYMENT_SOURCE%\build"
