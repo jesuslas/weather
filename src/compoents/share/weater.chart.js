@@ -9,6 +9,7 @@ import { scaleTime, scaleLinear } from "@vx/scale";
 import { extent } from "d3-array";
 import { toLowerCaseAndRemoveSpaces, processTemp } from "../utils";
 import moment from "moment";
+import { isMobile } from "react-device-detect";
 // accessors
 const x = d => d.date;
 const y = d => d.value;
@@ -27,6 +28,10 @@ function numTicksForWidth(width) {
 }
 
 const WeatherChart = ({ width, height, margin, data, currentDay }) => {
+  if (isMobile) {
+    const { innerWidth } = window;
+    width = innerWidth;
+  }
   const getCurrentHourDay = days5 => {
     return (
       days5.find(
@@ -59,6 +64,7 @@ const WeatherChart = ({ width, height, margin, data, currentDay }) => {
     domain: [0, Math.max(...data.map(y))],
     nice: true
   });
+
   return (
     <svg width={width} height={height}>
       <GradientOrangeRed

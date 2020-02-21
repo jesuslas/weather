@@ -151,8 +151,7 @@ function TabsRouter(props) {
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "transparent",
-    flexGrow: 1,
-    margin: "0px 15px 0px"
+    flexGrow: 1
   },
   shadowTabs: {
     boxShadow: "none"

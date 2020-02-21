@@ -11,7 +11,7 @@ function WeatherHours(props) {
 
   const classes = useStyles();
   return (
-    <Grid container spacing={1} className={classes.day}>
+    <Grid container className={classes.day}>
       <Grid item xs={12}>
         <div className={classes.label}>{city.name}</div>
       </Grid>
@@ -19,14 +19,14 @@ function WeatherHours(props) {
         <div className={classes.labelDay}>{traslateDay(label)}</div>
       </Grid>
       <Grid container item>
-        <Grid item xs={12} sm={5} />
-        <Grid item xs={12} sm={1}>
+        <Grid item lg={5} xs={2} />
+        <Grid item lg={1} xs={3}>
           <Avatar
             classes={{ root: classes.avatarBig }}
             src={getIconWeather(main)}
           />
         </Grid>
-        <Grid item xs={12} sm={1}>
+        <Grid item lg={1} xs={3}>
           <div className={classes.tempDay}>
             {(
               (parseInt(processTemp(temp_min)) +
@@ -36,10 +36,11 @@ function WeatherHours(props) {
             °
           </div>
         </Grid>
-        <Grid item xs={12} sm={5} />
+        <Grid item lg={5} xs={4} />
       </Grid>
       <Grid container>
-        <Grid item xs={12}>
+        <Grid item lg={2} xs={1} />
+        <Grid item lg={8} xs={10}>
           <List className={classes.list}>
             {(hours || []).map(
               ({ dt_txt, main: { temp }, weather: [{ main: _main }] }, i) => (
@@ -68,6 +69,7 @@ function WeatherHours(props) {
             )}
           </List>
         </Grid>
+        <Grid item lg={2} xs={1} />
       </Grid>
     </Grid>
   );
@@ -76,7 +78,6 @@ function WeatherHours(props) {
 const useStyles = makeStyles(() => ({
   day: {
     height: "auto",
-    padding: 10,
     color: "#fff",
     fontFamily: "Calibri"
   },
@@ -115,7 +116,7 @@ const useStyles = makeStyles(() => ({
     width: 25,
     height: 25,
     marginTop: 5,
-    marginLeft: 15
+    marginLeft: 5
   },
   avatarBig: {
     width: 65,

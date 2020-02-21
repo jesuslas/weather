@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 480px) {
+
+  .makeStyles-list-174 {
+    max-width: 414px;
+    overflow: scroll;
+  }
+  .makeStyles-label-218 {
+    color: #fff !important;
+    font-size: 14px !important;
+  }
+  .makeStyles-temp-219{
+    font-size: 30px !important;
+  }
+  svg {
+    width: auto;
+    height: 200px;
+  }
+
+}
