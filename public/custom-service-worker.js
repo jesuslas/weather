@@ -24,7 +24,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp("https://api.openweathermap.org/"),
-  workbox.strategies.cacheFirst()
+  workbox.strategies.staleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
