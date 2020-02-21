@@ -24,12 +24,10 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp("https://api.openweathermap.org/"),
-  workbox.strategies.staleWhileRevalidate()
+  workbox.strategies.cacheFirst()
 );
 
-/*
 workbox.routing.registerRoute(
-  new RegExp('https://randomuser.me/api'),
+  new RegExp("https://weather.jesusalpino.com/"),
   workbox.strategies.cacheFirst()
-)
-*/
+);
