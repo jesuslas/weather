@@ -31,20 +31,6 @@ export function register(config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return;
     }
-    window.addEventListener("fetch", function(event) {
-      const request = event.request;
-      console.log("request.method", request.method);
-      // get
-      if (request.method !== "GET") {
-        return;
-      }
-
-      // buscar en cache
-      event.respondWith(cachedResponse(request));
-
-      // actualizar el cache
-      event.waitUntil(updateCache(request));
-    });
 
     window.addEventListener("load", () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
@@ -99,7 +85,20 @@ function registerValidSW(swUrl, config) {
                 "New content is available and will be used when all " +
                   "tabs for this page are closed. See https://bit.ly/CRA-PWA."
               );
+              window.addEventListener("fetch", function(event) {
+                const request = event.request;
+                console.log("request.method", request.method);
+                // get
+                if (request.method !== "GET") {
+                  return;
+                }
 
+                // buscar en cache
+                event.respondWith(cachedResponse(request));
+
+                // actualizar el cache
+                event.waitUntil(updateCache(request));
+              });
               // Execute callback
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
