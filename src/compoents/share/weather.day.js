@@ -10,7 +10,9 @@ function WeatherDay(props) {
   return (
     <Grid container className={classes.day}>
       <Grid item xs={12}>
-        <div className={classes.label}>{traslateDay(label)}</div>
+        <div className={`${classes.label} labelMobile`}>
+          {traslateDay(label)}
+        </div>
       </Grid>
       <Grid container>
         <Grid item xs={12} lg={12}>
@@ -19,13 +21,13 @@ function WeatherDay(props) {
           </div>
         </Grid>
         <Grid item xs={12} lg={12}>
-          <div className={classes.temp}>
+          <div className={`${classes.temp} tempMobile`}>
             {((parseInt(temp_min) + parseInt(temp_max)) / 2).toFixed(0)}°
           </div>
         </Grid>
       </Grid>
       <Grid item xs={12} lg={12}>
-        <div className={classes.label}>
+        <div className={`${classes.label} labelMobileAprox`}>
           {temp_max}° / {temp_min}°
         </div>
       </Grid>

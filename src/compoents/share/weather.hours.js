@@ -41,7 +41,7 @@ function WeatherHours(props) {
       <Grid container>
         <Grid item lg={2} xs={1} />
         <Grid item lg={8} xs={10}>
-          <List className={classes.list}>
+          <List className={`${classes.list} listMobile`}>
             {(hours || []).map(
               ({ dt_txt, main: { temp }, weather: [{ main: _main }] }, i) => (
                 <ListItem key={i}>

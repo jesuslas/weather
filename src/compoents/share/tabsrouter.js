@@ -133,7 +133,7 @@ function TabsRouter(props) {
                         key={label}
                         label={<WeatherDay {...{ label, ...rest }} />}
                         component={Link}
-                        className={classes.tabButton}
+                        className={`${classes.tabButton} tabButton`}
                         tabIndex={index}
                       />
                     ))}
