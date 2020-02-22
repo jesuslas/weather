@@ -124,7 +124,7 @@ const WeatherChart = ({ width, height, margin, data, currentDay }) => {
             fill: "#fff",
             textAnchor: "middle",
             fontSize: 12,
-            fontFamily: "Calibri"
+            fontFamily: "Arial"
           }}
           stroke="#1b1a1e"
           tickStroke="#8e205f"
@@ -132,7 +132,7 @@ const WeatherChart = ({ width, height, margin, data, currentDay }) => {
             fill: "#fff",
             textAnchor: "end",
             fontSize: 14,
-            fontFamily: "Calibri",
+            fontFamily: "Arial",
             dx: "0.25em",
             dy: "0.25em"
           })}
@@ -146,12 +146,6 @@ const WeatherChart = ({ width, height, margin, data, currentDay }) => {
           scale={xScale}
           numTicks={numTicksForWidth(width)}
           label="Time"
-          labelProps={{
-            fill: "#fff",
-            textAnchor: "middle",
-            fontSize: 12,
-            fontFamily: "Calibri"
-          }}
         >
           {axis => {
             const tickLabelSize = 10;

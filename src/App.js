@@ -23,7 +23,7 @@ function App() {
             {...{
               width: 740,
               height: 200,
-              margin: { left: 80, right: 20, top: 30, bottom: 70 },
+              margin: { left: 80, right: 20, top: 30, bottom: 40 },
               data,
               currentDay
             }}
@@ -37,7 +37,8 @@ function App() {
 const useStyles = makeStyles(() => ({
   divider: {
     backgroundColor: "gray",
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 10
   }
 }));
 
