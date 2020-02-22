@@ -23,7 +23,7 @@ function App() {
             {...{
               width: 740,
               height: 200,
-              margin: { left: 80, right: 20, top: 30, bottom: 40 },
+              margin: { left: 60, right: 20, top: 30, bottom: 40 },
               data,
               currentDay
             }}
