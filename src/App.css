@@ -37,22 +37,26 @@
   }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 480px) {
 
   .makeStyles-list-174 {
-    max-width: 360px;
+    max-width: 414px;
     overflow: scroll;
   }
-  .makeStyles-label-218 {
+  .makeStyles-label-179 {
     color: #fff !important;
     font-size: 14px !important;
   }
   .makeStyles-temp-219{
     font-size: 30px !important;
   }
-  svg {
-    width: auto;
-    height: 200px;
+  .makeStyles-temp-180  {
+    font-size: 24px !important;
   }
-
+  .makeStyles-tabButton-4 {
+    width: 60px !important;
+  }
+  .MuiTab-root {
+    min-width: 65px !important;
+  }
 }
