@@ -16,7 +16,7 @@ function WeatherHours(props) {
         <div className={classes.label}>{city.name}</div>
       </Grid>
       <Grid item xs={12}>
-        <div className={classes.labelDay}>{traslateDay(label)}</div>
+        <div className={classes.labelDay}>{traslateDay(label, true)}</div>
       </Grid>
       <Grid container item>
         <Grid item lg={5} xs={2} />
@@ -26,7 +26,7 @@ function WeatherHours(props) {
             src={getIconWeather(main)}
           />
         </Grid>
-        <Grid item lg={1} xs={3}>
+        <Grid item lg={1} xs={5}>
           <div className={classes.tempDay}>
             {(
               (parseInt(processTemp(temp_min)) +
@@ -36,7 +36,7 @@ function WeatherHours(props) {
             °
           </div>
         </Grid>
-        <Grid item lg={5} xs={4} />
+        <Grid item lg={5} xs={2} />
       </Grid>
       <Grid container>
         <Grid item lg={2} xs={1} />
