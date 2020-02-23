@@ -48,14 +48,14 @@ function WeatherHours(props) {
         <div className={classes.labelDay}>{traslateDay(label, true)}</div>
       </Grid>
       <Grid container item>
-        <Grid item lg={5} xs={2} />
-        <Grid item lg={1} xs={3}>
+        <Grid item lg={5} xl={5} md={5} xs={2} />
+        <Grid item lg={1} xl={1} md={1} xs={3}>
           <Avatar
             classes={{ root: classes.avatarBig }}
             src={getIconWeather(main)}
           />
         </Grid>
-        <Grid item lg={1} xs={5}>
+        <Grid item lg={1} xl={1} md={1} xs={5}>
           <div className={classes.tempDay}>
             {(
               (parseInt(processTemp(temp_min)) +
@@ -65,11 +65,11 @@ function WeatherHours(props) {
             °
           </div>
         </Grid>
-        <Grid item lg={5} xs={2} />
+        <Grid item lg={5} xl={5} md={5} xs={2} />
       </Grid>
       <Grid container>
-        <Grid item lg={2} xs={1} />
-        <Grid item lg={8} xs={10}>
+        <Grid item lg={2} xl={2} xs={1} />
+        <Grid item lg={8} xl={8} xs={10}>
           <List className={`${classes.list} listMobile`}>
             {(hours || []).map(
               ({ dt_txt, main: { temp }, weather: [{ main: _main }] }, i) => (
@@ -98,7 +98,7 @@ function WeatherHours(props) {
             )}
           </List>
         </Grid>
-        <Grid item lg={2} xs={1} />
+        <Grid item lg={2} xl={2} xs={1} />
       </Grid>
     </Grid>
   );

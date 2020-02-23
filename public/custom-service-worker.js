@@ -28,6 +28,11 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
+  new RegExp("https://api.openweathermap.org/"),
+  workbox.strategies.cacheFirst()
+);
+
+workbox.routing.registerRoute(
   new RegExp("https://weather.jesusalpino.com/"),
   workbox.strategies.cacheFirst()
 );
