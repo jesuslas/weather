@@ -9,6 +9,9 @@ import WeatherHours from "./weather.hours";
 import { getWeather5Days } from "../../services/weather.serv";
 import moment from "moment";
 import { Divider } from "@material-ui/core";
+// import list from "../../assets/data/list.json";
+// import city from "../../assets/data/city.json";
+// import cod from "../../assets/data/cod.json";
 
 const getMinAndMaxTemp = hours => {
   hours = hours.sort(
@@ -21,8 +24,8 @@ const getMinAndMaxTemp = hours => {
     temp_max: hours[hours.length - 1].main.temp_max
   };
 };
-const getWeather5DaysFromApi = async () => {
-  let weatherDays = await getWeather5Days();
+const getWeather5DaysFromApi = async cityId => {
+  let weatherDays = await getWeather5Days(cityId);
   const { cod, list, city } = await weatherDays.json();
   const processValue = value => {
     return moment(value).format("dddd");
@@ -36,6 +39,7 @@ const getWeather5DaysFromApi = async () => {
       const hours = days[label];
       const hoursMinMax = [...hours];
       const { temp_min, temp_max } = getMinAndMaxTemp(hoursMinMax);
+
       if (hours.length < 8) {
         const diff = 8 - hours.length;
         for (let i = 0; i < diff; i++) {
@@ -45,8 +49,10 @@ const getWeather5DaysFromApi = async () => {
       return {
         label,
         to: `/${toLowerCaseAndRemoveSpaces(label)}`,
-        render: () => (
-          <WeatherHours {...{ main, temp_min, temp_max, label, hours, city }} />
+        render: props => (
+          <WeatherHours
+            {...{ main, temp_min, temp_max, label, hours, city, ...props }}
+          />
         ),
         temp_min: processTemp(temp_min),
         temp_max: processTemp(temp_max),
@@ -63,17 +69,17 @@ function TabsRouter(props) {
   const [tabs, setTabs] = useState([]);
   const urlDay = props.location.pathname.split("/")[1];
   setCurrentDay(urlDay);
-
+  const [cityId, setCity] = useState("3873544");
   useEffect(
     () => {
       async function getDays() {
-        const days5 = await getWeather5DaysFromApi();
+        const days5 = await getWeather5DaysFromApi(cityId);
         setTabs(days5);
         setData(days5);
       }
       getDays();
     },
-    [setData]
+    [setTabs, cityId, setData]
   );
 
   const classes = useStyles();
@@ -88,13 +94,13 @@ function TabsRouter(props) {
             return (
               <div className={classes.root}>
                 <Switch>
-                  {tabs.map(({ render, to, ...rest }, i) => (
+                  {tabs.map(({ render, to }, i) => (
                     <Route
                       key={i}
-                      render={_props => (
+                      render={() => (
                         <>
                           {hasData ? (
-                            <>{render({ ..._props, ...rest, uno: "dos" })}</>
+                            <>{render({ cityId, setCity })}</>
                           ) : (
                             <div className={classes.noData}>
                               <Typography>No data to display</Typography>
