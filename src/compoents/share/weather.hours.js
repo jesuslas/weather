@@ -7,6 +7,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { processTemp, getTime, getIconWeather, traslateDay } from "../utils";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import cities from "../../assets/cities.json";
+console.log("cities", cities);
 function WeatherHours(props) {
   const {
     label,
@@ -14,44 +16,41 @@ function WeatherHours(props) {
     temp_max = 10,
     main,
     hours,
-    city
-    // setCity
+    city,
+    setCity
   } = props;
   console.log("props", props);
   const classes = useStyles();
   return (
-    <Grid container spacing={1} className={classes.day}>
+    <Grid container className={classes.day}>
       <Grid item xs={12}>
         <div className={classes.label}>{city.name}</div>
         <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          // open={open}
-          // onClose={handleClose}
-          // onOpen={handleOpen}
-          // value={age}
-          // onChange={handleChange}
+          labelId="select-label"
+          id="select"
+          onChange={setCity}
+          style={{ colot: "#fff" }}
+          autoWidth
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {cities.map(({ name, id }) => (
+            <MenuItem key={id} value={id}>
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </Grid>
       <Grid item xs={12}>
-        <div className={classes.labelDay}>{traslateDay(label)}</div>
+        <div className={classes.labelDay}>{traslateDay(label, true)}</div>
       </Grid>
       <Grid container item>
-        <Grid item xs={12} sm={5} />
-        <Grid item xs={12} sm={1}>
+        <Grid item lg={5} xs={2} />
+        <Grid item lg={1} xs={3}>
           <Avatar
             classes={{ root: classes.avatarBig }}
             src={getIconWeather(main)}
           />
         </Grid>
-        <Grid item xs={12} sm={1}>
+        <Grid item lg={1} xs={5}>
           <div className={classes.tempDay}>
             {(
               (parseInt(processTemp(temp_min)) +
@@ -61,11 +60,12 @@ function WeatherHours(props) {
             °
           </div>
         </Grid>
-        <Grid item xs={12} sm={5} />
+        <Grid item lg={5} xs={2} />
       </Grid>
       <Grid container>
-        <Grid item xs={12}>
-          <List className={classes.list}>
+        <Grid item lg={2} xs={1} />
+        <Grid item lg={8} xs={10}>
+          <List className={`${classes.list} listMobile`}>
             {(hours || []).map(
               ({ dt_txt, main: { temp }, weather: [{ main: _main }] }, i) => (
                 <ListItem key={i}>
@@ -93,6 +93,7 @@ function WeatherHours(props) {
             )}
           </List>
         </Grid>
+        <Grid item lg={2} xs={1} />
       </Grid>
     </Grid>
   );
@@ -101,7 +102,6 @@ function WeatherHours(props) {
 const useStyles = makeStyles(() => ({
   day: {
     height: "auto",
-    padding: 10,
     color: "#fff",
     fontFamily: "Calibri"
   },
@@ -140,7 +140,7 @@ const useStyles = makeStyles(() => ({
     width: 25,
     height: 25,
     marginTop: 5,
-    marginLeft: 15
+    marginLeft: 5
   },
   avatarBig: {
     width: 65,

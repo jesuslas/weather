@@ -5,6 +5,7 @@ import rain from "../assets/images/icon_rain_sky.png";
 import snow from "../assets/images/icon_clouds_snow.png";
 import clearSkyDay from "../assets/images/icon_clear_sky_day.png";
 import clearSkyNight from "../assets/images/icon_clear_sky_night.png";
+import { isMobile } from "react-device-detect";
 
 export function toLowerCaseAndRemoveSpaces(string) {
   return String(string)
@@ -59,16 +60,17 @@ export function getIconWeather(value, time) {
   return image;
 }
 
-export function traslateDay(value) {
+export function traslateDay(value, defaule = false) {
   let day = toLowerCaseAndRemoveSpaces(value);
+  const _isMobile = isMobile && !defaule;
   const days = {
-    monday: "Lunes",
-    tuesday: "Martes",
-    wednesday: "Miércoles",
-    thursday: "Jueves",
-    friday: "Viernes",
-    saturday: "Sábado",
-    sunday: "Domingo"
+    monday: _isMobile ? "LU" : "Lunes",
+    tuesday: _isMobile ? "MA" : "Martes",
+    wednesday: _isMobile ? "MI" : "Miércoles",
+    thursday: _isMobile ? "JU" : "Jueves",
+    friday: _isMobile ? "VI" : "Viernes",
+    saturday: _isMobile ? "SA" : "Sábado",
+    sunday: _isMobile ? "DO" : "Domingo"
   };
   return days[day] || "invalid day";
 }

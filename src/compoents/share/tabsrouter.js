@@ -21,8 +21,8 @@ const getMinAndMaxTemp = hours => {
     temp_max: hours[hours.length - 1].main.temp_max
   };
 };
-const getWeather5DaysFromApi = async () => {
-  let weatherDays = await getWeather5Days();
+const getWeather5DaysFromApi = async cityId => {
+  let weatherDays = await getWeather5Days(cityId);
   const { cod, list, city } = await weatherDays.json();
   const processValue = value => {
     return moment(value).format("dddd");
@@ -34,7 +34,8 @@ const getWeather5DaysFromApi = async () => {
         weather: [{ main }]
       } = days[label][0];
       const hours = days[label];
-      const { temp_min, temp_max } = getMinAndMaxTemp(hours);
+      const hoursMinMax = [...hours];
+      const { temp_min, temp_max } = getMinAndMaxTemp(hoursMinMax);
       if (hours.length < 8) {
         const diff = 8 - hours.length;
         for (let i = 0; i < diff; i++) {
@@ -51,7 +52,8 @@ const getWeather5DaysFromApi = async () => {
         ),
         temp_min: processTemp(temp_min),
         temp_max: processTemp(temp_max),
-        main
+        main,
+        hours
       };
     });
     return days;
@@ -59,17 +61,22 @@ const getWeather5DaysFromApi = async () => {
   return [];
 };
 function TabsRouter(props) {
-  const { variant, onChange, hasData = true } = props;
+  const { variant, onChange, hasData = true, setData, setCurrentDay } = props;
   const [tabs, setTabs] = useState([]);
+  const urlDay = props.location.pathname.split("/")[1];
+  setCurrentDay(urlDay);
   const [city, setCity] = useState("3873544");
-  // console.log("this.props.match.params.redirectParam", props);
-  useEffect(() => {
-    async function getDays() {
-      const days5 = await getWeather5DaysFromApi();
-      setTabs(days5);
-    }
-    getDays();
-  }, city);
+  useEffect(
+    () => {
+      async function getDays() {
+        const days5 = await getWeather5DaysFromApi(city);
+        setTabs(days5);
+        setData(days5);
+      }
+      getDays();
+    },
+    [setTabs, city, setData]
+  );
 
   const classes = useStyles();
   return (
@@ -100,7 +107,9 @@ function TabsRouter(props) {
                       path={tabRoute(to)}
                     />
                   ))}
-                  <Redirect to={tabRoute((tabs[0] || {}).to || "/wednesday")} />
+                  {(tabs[0] || {}).to && (
+                    <Redirect to={tabRoute((tabs[0] || {}).to)} />
+                  )}
                   ;
                 </Switch>
                 <Divider classes={{ root: classes.divider }} />
@@ -126,7 +135,7 @@ function TabsRouter(props) {
                         key={label}
                         label={<WeatherDay {...{ label, ...rest }} />}
                         component={Link}
-                        className={classes.tabButton}
+                        className={`${classes.tabButton} tabButton`}
                         tabIndex={index}
                       />
                     ))}
@@ -144,8 +153,7 @@ function TabsRouter(props) {
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "transparent",
-    flexGrow: 1,
-    margin: "0px 15px 0px"
+    flexGrow: 1
   },
   shadowTabs: {
     boxShadow: "none"
@@ -163,7 +171,8 @@ const useStyles = makeStyles(() => ({
   },
   divider: {
     backgroundColor: "gray",
-    marginBottom: 50
+    marginBottom: 5,
+    marginTop: 5
   }
 }));
 export default withRouter(memo(TabsRouter));

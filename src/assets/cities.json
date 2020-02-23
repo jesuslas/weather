@@ -1,7 +1,7 @@
 [
     {
         "id": 3873544,
-        "name": "Región Metropolitana de Santiago",
+        "name": "Región Metropolitana de Santiago, (Chile)",
         "country": "CL",
         "coord": {
           "lon": -70.64724,
@@ -9,8 +9,17 @@
         }
       },
       {
+        "id": 3893894,
+        "name": "Concepcion, (Chile)",
+        "country": "CL",
+        "coord": {
+          "lon": -73.049767,
+          "lat": -36.826988
+        }
+      },
+      {
         "id": 3649403,
-        "name": "Caracas",
+        "name": "Altamira, (Venezuela)",
         "country": "VE",
         "coord": {
           "lon": -70.502441,
@@ -18,12 +27,75 @@
         }
       },
       {
-        "id": 3893894,
-        "name": "Concepcion",
-        "country": "CL",
+        "id": 3804240,
+        "name": "El Silencio, (Venezuela)",
+        "country": "VE",
         "coord": {
-          "lon": -73.049767,
-          "lat": -36.826988
+          "lon": -66.965019,
+          "lat": 10.358
+        }
+      },
+      {
+        "id": 3625035,
+        "name": "Estado Zulia, (Venezuela)",
+        "country": "VE",
+        "coord": {
+          "lon": -72.166664,
+          "lat": 10
+        }
+      },
+      {
+        "id": 3688689,
+        "name": "Bogota, (COLOMBIA)",
+        "country": "CO",
+        "coord": {
+          "lon": -74.081749,
+          "lat": 4.60971
+        }
+      },
+      {
+        "id": 3435907,
+        "name": "Provincia de Buenos Aires, (Argentina)",
+        "country": "AR",
+        "coord": {
+          "lon": -60,
+          "lat": -36
+        }
+      },
+      {
+        "id": 3433955,
+        "name": "Ciudad AutÃ³noma de Buenos Aires, (Argentina)",
+        "country": "AR",
+        "coord": {
+          "lon": -58.450001,
+          "lat": -34.599998
+        }
+      },
+      {
+        "id": 6447142,
+        "name": "Marseille, (Francia)",
+        "country": "FR",
+        "coord": {
+          "lon": 5.4,
+          "lat": 43.299999
+        }
+      },
+      {
+        "id": 2911298,
+        "name": "Hamburg, (ALemania)",
+        "country": "DE",
+        "coord": {
+          "lon": 10,
+          "lat": 53.549999
+        }
+      },
+      {
+        "id": 4923517,
+        "name": "Miami (USA)",
+        "country": "US",
+        "coord": {
+          "lon": -86.068878,
+          "lat": 40.753651
         }
       }
 ]

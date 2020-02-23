@@ -22,7 +22,6 @@
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
-  padding-top: 102px;
 }
 
 .App-link {
@@ -35,5 +34,29 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+
+  .listMobile {
+    max-width: 414px;
+    overflow: scroll;
+  }
+  .labelMobile {
+    font-size: 14px !important;
+  }
+  .labelMobileAprox{
+    font-size: 9px !important;
+  }
+  
+  .tempMobile  {
+    font-size: 22px !important;
+  }
+  .tabButton {
+    width: 60px !important;
+  }
+  .MuiTab-root {
+    min-width: 65px !important;
   }
 }

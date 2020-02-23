@@ -8,24 +8,26 @@ function WeatherDay(props) {
   const { label, temp_min = 0, temp_max = 10, main } = props;
   const classes = useStyles();
   return (
-    <Grid container spacing={1} className={classes.day}>
+    <Grid container className={classes.day}>
       <Grid item xs={12}>
-        <div className={classes.label}>{traslateDay(label)}</div>
+        <div className={`${classes.label} labelMobile`}>
+          {traslateDay(label)}
+        </div>
       </Grid>
-      <Grid container spacing={0}>
-        <Grid item xs={12} sm={4}>
+      <Grid container>
+        <Grid item xs={12} lg={12}>
           <div className={classes.imageItem}>
             <Avatar src={getIconWeather(main)} />
           </div>
         </Grid>
-        <Grid item xs={12} sm={8}>
-          <div className={classes.temp}>
+        <Grid item xs={12} lg={12}>
+          <div className={`${classes.temp} tempMobile`}>
             {((parseInt(temp_min) + parseInt(temp_max)) / 2).toFixed(0)}°
           </div>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <div className={classes.label}>
+      <Grid item xs={12} lg={12}>
+        <div className={`${classes.label} labelMobileAprox`}>
           {temp_max}° / {temp_min}°
         </div>
       </Grid>
