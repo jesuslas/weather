@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 codealike.json
 src/assets/images/icon-Recuperado-Recuperado.psd
+src/assets/data/cod.json
+src/assets/data/city.json
+src/assets/data/list.json

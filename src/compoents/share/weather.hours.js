@@ -7,8 +7,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { processTemp, getTime, getIconWeather, traslateDay } from "../utils";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import cities from "../../assets/cities.json";
-console.log("cities", cities);
+import cities from "../../assets/data/cities.json";
+
 function WeatherHours(props) {
   const {
     label,
@@ -16,21 +16,26 @@ function WeatherHours(props) {
     temp_max = 10,
     main,
     hours,
-    city,
+    cityId,
     setCity
   } = props;
-  console.log("props", props);
   const classes = useStyles();
   return (
     <Grid container className={classes.day}>
       <Grid item xs={12}>
-        <div className={classes.label}>{city.name}</div>
         <Select
           labelId="select-label"
           id="select"
-          onChange={setCity}
+          onChange={({ target: { value } }) => setCity(value)}
           style={{ colot: "#fff" }}
           autoWidth
+          value={cityId}
+          className={classes.select}
+          inputProps={{
+            classes: {
+              icon: classes.icon
+            }
+          }}
         >
           {cities.map(({ name, id }) => (
             <MenuItem key={id} value={id}>
@@ -103,7 +108,8 @@ const useStyles = makeStyles(() => ({
   day: {
     height: "auto",
     color: "#fff",
-    fontFamily: "Calibri"
+    fontFamily: "Calibri",
+    paddingTop: 20
   },
   item: {
     textAlign: "center"
@@ -147,6 +153,18 @@ const useStyles = makeStyles(() => ({
     height: 65,
     marginTop: 25,
     marginLeft: 25
+  },
+  select: {
+    color: "#fff",
+    "&:before": {
+      borderColor: "#fff"
+    },
+    "&:after": {
+      borderColor: "#fff"
+    }
+  },
+  icon: {
+    fill: "#fff"
   }
 }));
 export default memo(WeatherHours);

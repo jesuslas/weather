@@ -18,6 +18,24 @@
         }
       },
       {
+        "id": 3873775,
+        "name": "Rancagua (Chile)",
+        "country": "CL",
+        "coord": {
+          "lon": -70.744438,
+          "lat": -34.17083
+        }
+      },
+      {
+        "id": 3895061,
+        "name": "Chimbarongo",
+        "country": "CL",
+        "coord": {
+          "lon": -71.050003,
+          "lat": -34.700001
+        }
+      },
+      {
         "id": 3649403,
         "name": "Altamira, (Venezuela)",
         "country": "VE",
@@ -64,7 +82,7 @@
       },
       {
         "id": 3433955,
-        "name": "Ciudad AutÃ³noma de Buenos Aires, (Argentina)",
+        "name": "Ciudad Autónoma de Buenos Aires, (Argentina)",
         "country": "AR",
         "coord": {
           "lon": -58.450001,
