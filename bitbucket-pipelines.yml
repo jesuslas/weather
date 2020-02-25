@@ -24,4 +24,4 @@ pipelines:
             - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_MLIBRE
             # --- # deploy # --- #
             - aws s3 cp build/ s3://weather.jesusalpino.com --recursive
-            # - aws cloudfront create-invalidation --distribution-id E1Y9CMTQPV2LXU --paths /index.html /manifest.json /static/*
+            - aws cloudfront create-invalidation --distribution-id E3HNR6GY6Y2C7D --paths /index.html /manifest.json /static/*
